@@ -3,10 +3,10 @@ package ru.netology.movie;
 public class MovieManager {
 
     private String[] movies = new String[0];
-    private int limit;
+    private int limit = 5;
 
     public MovieManager() {
-        this.limit = 7;
+
     }
 
     public MovieManager(int limit) {
@@ -31,15 +31,16 @@ public class MovieManager {
 
 
     public String[] findLast() {
-        int resultLength;
-        if (movies.length < limit) {
-            resultLength = movies.length;
-        } else {
+        int resultLength = movies.length;
+        if (resultLength >= limit) {
             resultLength = limit;
+        } else {
+            resultLength = movies.length;
         }
         String[] tmp = new String[resultLength];
-        for (int i = 0; i < movies.length; i++) {
-            tmp[i] = movies[movies.length - 1 - i];
+        for (int i = 0; i < resultLength; i++) {
+            int index = movies.length - i - 1;
+            tmp[i] = movies[index];
 
         }
         return tmp;

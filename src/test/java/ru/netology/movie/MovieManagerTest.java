@@ -42,7 +42,22 @@ class MovieManagerTest {
     }
 
     @Test
-    public void findLast() {
+    public void findLastLimit() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("FILM I");
+        manager.addMovie("FILM II");
+        manager.addMovie("FILM III");
+        manager.addMovie("FILM IV");
+        manager.addMovie("FILM V");
+
+        String[] expected = {"FILM V", "FILM IV", "FILM III", "FILM II", "FILM I"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastLessLimit() {
         MovieManager manager = new MovieManager();
 
         manager.addMovie("FILM I");
@@ -53,6 +68,64 @@ class MovieManagerTest {
         String[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void findLastMoreLimit() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("FILM I");
+        manager.addMovie("FILM II");
+        manager.addMovie("FILM III");
+        manager.addMovie("FILM IV");
+        manager.addMovie("FILM V");
+        manager.addMovie("FILM VI");
+        manager.addMovie("FILM VII");
+
+        String[] expected = {"FILM VII", "FILM VI", "FILM V", "FILM IV", "FILM III"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastShouldThreeLastMovies() {
+        MovieManager manager = new MovieManager(3);
+
+        manager.addMovie("FILM I");
+        manager.addMovie("FILM II");
+        manager.addMovie("FILM III");
+        manager.addMovie("FILM IV");
+        manager.addMovie("FILM V");
+        manager.addMovie("FILM VI");
+        manager.addMovie("FILM VII");
+        manager.addMovie("FILM VIII");
+        manager.addMovie("FILM IX");
+        manager.addMovie("FILM X");
+
+        String[] expected = {"FILM X", "FILM IX", "FILM VIII"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastShouldSevenLastMovies() {
+        MovieManager manager = new MovieManager(7);
+
+        manager.addMovie("FILM I");
+        manager.addMovie("FILM II");
+        manager.addMovie("FILM III");
+        manager.addMovie("FILM IV");
+        manager.addMovie("FILM V");
+        manager.addMovie("FILM VI");
+        manager.addMovie("FILM VII");
+        manager.addMovie("FILM VIII");
+        manager.addMovie("FILM IX");
+        manager.addMovie("FILM X");
+
+        String[] expected = {"FILM X", "FILM IX", "FILM VIII", "FILM VII", "FILM VI", "FILM V", "FILM IV"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 
 
 }
